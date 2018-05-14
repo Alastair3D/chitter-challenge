@@ -88,6 +88,7 @@ DEPENDENCIES
   rubocop
   simplecov
   simplecov-console
+  sinatra
   sinatra-flash
 
 RUBY VERSION

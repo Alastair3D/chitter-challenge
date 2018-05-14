@@ -1,1 +1,13 @@
-<h1> <%= @peeps.all %> </h1>
+<% @peeps.each do |peep| %>
+<h4><%= "#{peep[:author]}: "%></h4><p><%= "#{peep[:text]}" %><br></p>
+<% end %>
+
+<br>
+
+<form action="/add" method="post">
+  <p>New Peep: (maximum 140 characters)</p>
+  <input type="text" name="text2">
+  <p>Your name:</p>
+  <input type="text" name="author">
+  <input type="submit" value="Post_new_Peep"
+</form>

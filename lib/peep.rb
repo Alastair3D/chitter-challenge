@@ -2,11 +2,17 @@ require 'pg'
 
 class Peep
 
-  def all
-    connect = PG.connect :dbname => 'chitter'
-    results = connect.exec "SELECT * FROM peeps"
-    result.map { |row| row['Peep'] }
+  def self.all
+    result = set_database.exec("SELECT * FROM peeps")
+    result.map { |peep| { text: peep['text'], author: peep['author'] } }
   end
 
+  def self.create(text, author)
+    set_database.exec("INSERT INTO peeps (text, author) VALUES('#{text}', '#{author}')")
+  end
+
+  def self.set_database
+    ENV['RACK'] == 'test' ? PG.connect(dbname: 'chitter_test') : PG.connect(dbname: 'chitter')
+  end
 
 end
